@@ -285,5 +285,31 @@ public class PiglatinTest {
 		assertEquals("Oxypray orpyxxxay", translation);
 	}
 	
+	@Test
+	public void testPhraseMixed() throws Exception{
+		Piglatin piglatin = new Piglatin("Input and INPUT");
+		String translation = piglatin.translate();
+		assertEquals("Inputay anday INPUTAY", translation);
+	}
 
+	@Test
+	public void testPhraseMixed2() throws Exception{
+		Piglatin piglatin = new Piglatin("Tipo Questo Input Lo Accetta");
+		String translation = piglatin.translate();
+		assertEquals("Ipotay Uestoqay Inputay Olay Accettaay", translation);
+	}
+	
+	@Test
+	public void testPhraseUpperLowerCase() throws Exception{
+		Piglatin piglatin = new Piglatin("Yellow Bird");
+		String translation = piglatin.translate();
+		assertEquals("Ellowyay Irdbay", translation);
+	}
+	
+	@Test
+	public void testPhraseUpperLowerCase1() throws Exception{
+		Piglatin piglatin = new Piglatin("Yellow bird");
+		String translation = piglatin.translate();
+		assertEquals("Ellowyay irdbay", translation);
+	}
 }
