@@ -130,7 +130,7 @@ public class Piglatin {
 		if(onlyFirstIsUpperCase(word)) {ay="ay";}
 		if(phraseIsOk(word)) {
 			if(startsWithVowel(word)) {
-				if(onlyFirstIsUpperCase(word)) {
+				if(onlyFirstIsUpperCase(word) && word.length() > 1) {
 					return convertOnlyFirstToUpper(word + add);
 				}else {
 					return word+add;

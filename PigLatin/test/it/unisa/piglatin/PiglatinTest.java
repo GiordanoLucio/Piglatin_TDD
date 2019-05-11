@@ -275,7 +275,7 @@ public class PiglatinTest {
 	public void testPhraseWithSpaces() throws Exception{
 		Piglatin piglatin = new Piglatin("I love Proxy");
 		String translation = piglatin.translate();
-		assertEquals("Iay ovelay Oxypray", translation);
+		assertEquals("IAY ovelay Oxypray", translation);
 	}
 
 	@Test
