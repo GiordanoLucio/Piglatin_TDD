@@ -111,7 +111,7 @@ public class PiglatinTest {
 	}
 
 	@Test
-	public void testTranslatePhrase() throws Exception{
+	public void testTranslatePhraseWith1Space() throws Exception{
 		Piglatin piglatin = new Piglatin("a yellow bird");
 		String translation = piglatin.translate();
 		assertEquals("aay ellowyay irdbay", translation);
@@ -201,43 +201,37 @@ public class PiglatinTest {
 	@Test(expected=InvalidPhraseException.class)
 	public void testPhraseIsNotOk() throws Exception{
 		Piglatin piglatin = new Piglatin("OkOkOk");
-		piglatin.translate();
+		//piglatin.translate();
 	}
-	@Test
-	public void testPhraseIsOk1() throws Exception{
-		Piglatin piglatin = new Piglatin("APPLE");
-		String translation = piglatin.translate();
-		assertEquals("APPLEAY", translation);
-	}
-
+	
 	@Test(expected=InvalidPhraseException.class)
 	public void testPhraseIsNotOK() throws Exception{
 		Piglatin piglatin = new Piglatin("OkkkkAk");
-		piglatin.translate();
+		//piglatin.translate();
 	}
 
 	@Test(expected=InvalidPhraseException.class)
 	public void testWrongWordCamelStartingVowel() throws Exception{
 		Piglatin piglatin = new Piglatin("OkOk");
-		String translation = piglatin.translate();
+		//String translation = piglatin.translate();
 	}
 	@Test(expected=InvalidPhraseException.class)
 	public void testCamelCaseInTheMiddle() throws Exception
 	{
 		Piglatin piglatin = new Piglatin("birDie");
-		String translation = piglatin.translate();
+		//String translation = piglatin.translate();
 	}
 
 	@Test(expected=InvalidPhraseException.class)
 	public void testWrongPhraseCamel() throws Exception{
 		Piglatin piglatin = new Piglatin("ThisIs AtEsT");
-		String translation = piglatin.translate();
+		//String translation = piglatin.translate();
 	}	
 
 	@Test(expected=InvalidPhraseException.class)
 	public void testWrongPhraseCapInTheMiddle() throws Exception{
 		Piglatin piglatin = new Piglatin("biRd");
-		String translation = piglatin.translate();
+		//String translation = piglatin.translate();
 	}		
 
 	@Test
@@ -343,7 +337,14 @@ public class PiglatinTest {
 		String translation = piglatin.translate();
 		assertEquals("OAY", translation);
 	}
-	
+		
+	@Test
+	public void testSignleCharX() throws Exception{
+		Piglatin piglatin = new Piglatin("X");
+		String translation = piglatin.translate();
+		assertEquals("XAY", translation);
+	}
+		
 	@Test(expected=Exception.class)
 	public void testEmptyString() throws Exception{
 		Piglatin piglatin = new Piglatin("");

@@ -22,7 +22,6 @@ public class Piglatin {
 		vowels.add('O');
 		vowels.add('U');
 
-
 		validCharacters = new HashSet<>();
 		validCharacters.add(' ');
 		validCharacters.add('a');
@@ -95,7 +94,6 @@ public class Piglatin {
 			char character = phrase.charAt(i);
 			if(!validCharacters.contains(character)) {
 				return true;
-
 			}
 		}
 		return false;
@@ -106,7 +104,6 @@ public class Piglatin {
 	}
 
 	public String getPhrase() {
-		// TODO Auto-generated method stub
 		return phrase;
 	}
 
@@ -124,50 +121,43 @@ public class Piglatin {
 		return builder.toString();
 	}	
 
-
 	private String translateWord(String word) throws Exception{
 		String AY = "AY";
 		String ay = "ay";
 		String add = "";
-		//if(word.length()>1 && onlyFirstIsUpperCase(word)) {add=ay;}
 		if(isUpper(word)) {
 			add=AY;
 		}else{
 			add = ay;
 		}
-		if(phraseIsOk(word)) {
-			if(startsWithVowel(word)) {
-				if(onlyFirstIsUpperCase(word) && word.length() > 1) {
-					return convertOnlyFirstToUpper(word + add);
-				}else {
-					return word+add;
-				}
-			}else if(word.length() > 1 && startsWithXrCheck(word)) {
-				if(onlyFirstIsUpperCase(word)) {
-					return convertOnlyFirstToUpper(startsWithXr(word));
-				}else {
-					return startsWithXr(word);
-				}
-			}else if(startsWithClusters(word)) {
-				if(onlyFirstIsUpperCase(word)) {
-					return convertOnlyFirstToUpper(convertConsonantCluster(word));
-				}else {
-					return convertConsonantCluster(word);
-				}
+		if(startsWithVowel(word)) {
+			if(onlyFirstIsUpperCase(word)) {
+				return convertOnlyFirstToUpper(word + add);
 			}else {
-				if(onlyFirstIsUpperCase(word)) {
-					char firstCharacter = word.charAt(0);
-					String substring = word.substring(1);
-					return convertOnlyFirstToUpper(substring + firstCharacter + add);
-				}else {
-					char firstCharacter = word.charAt(0);
-					String substring = word.substring(1);
-					return substring+firstCharacter+add;
-				}
+				return word+add;
 			}
-		}
-		else {
-			throw new InvalidPhraseException();
+		}else if(word.length() > 1 && startsWithXrCheck(word)) {
+			if(onlyFirstIsUpperCase(word)) {
+				return convertOnlyFirstToUpper(startsWithXr(word));
+			}else {
+				return startsWithXr(word);
+			}
+		}else if(startsWithClusters(word)) {
+			if(onlyFirstIsUpperCase(word)) {
+				return convertOnlyFirstToUpper(convertConsonantCluster(word));
+			}else {
+				return convertConsonantCluster(word);
+			}
+		}else {
+			if(onlyFirstIsUpperCase(word)) {
+				char firstCharacter = word.charAt(0);
+				String substring = word.substring(1);
+				return convertOnlyFirstToUpper(substring + firstCharacter + add);
+			}else {
+				char firstCharacter = word.charAt(0);
+				String substring = word.substring(1);
+				return substring+firstCharacter+add;
+			}
 		}
 	}
 
@@ -233,29 +223,6 @@ public class Piglatin {
 		}
 	}
 
-	/**private Boolean onlyFirstIsUpperCase(String word) throws Exception {
-		String upper = word.toUpperCase();
-		boolean val = false;
-		if(word.length()>1 ) {
-			if(word.charAt(0) == upper.charAt(0) && word.charAt(1) != upper.charAt(1)) {
-				val = true;
-			}else {
-				for(int i=1; i<word.length();i++) {
-					if (word.charAt(i) == upper.charAt(i) && word.charAt(i-1) != upper.charAt(i-1)) {
-						val = false;
-					}
-				}
-			}
-			return val;
-		}else {
-			if(word.charAt(0) == upper.charAt(0)) {
-				val=true;
-			}else {
-				val=false;
-			}
-			return val;
-		}	
-	}*/
 	private Boolean onlyFirstIsUpperCase(String word) throws Exception {
 		String upper = word.toUpperCase();
 		boolean val = false;
@@ -271,16 +238,6 @@ public class Piglatin {
 	private String convertOnlyFirstToUpper(String word) {
 		String lowerCase=word.toLowerCase();
 		return Character.toUpperCase(lowerCase.charAt(0)) + lowerCase.substring(1);		
-	}
-	private Boolean phraseIsOk(String word) throws InvalidPhraseException{
-		String upper = word.toUpperCase();
-		boolean val = true;
-		for(int i=1; i<word.length();i++) {
-			if (word.charAt(i) == upper.charAt(i) && word.charAt(i-1) != upper.charAt(i-1)) {
-				val = false;
-			}
-		}
-		return val;
 	}
 
 	private Boolean isUpper(String word) {
