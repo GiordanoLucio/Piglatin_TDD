@@ -345,9 +345,10 @@ public class PiglatinTest {
 		assertEquals("XAY", translation);
 	}
 		
-	@Test(expected=Exception.class)
+	@Test
 	public void testEmptyString() throws Exception{
 		Piglatin piglatin = new Piglatin("");
 		String translation = piglatin.translate();
+		assertEquals("", translation);
 	}
 }

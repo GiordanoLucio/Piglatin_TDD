@@ -82,10 +82,10 @@ public class Piglatin {
 		if(phrase.contains("  ") || startsOrEndWithSpace(phrase) || containsInvalidCharacter(phrase)) {
 			throw new InvalidPhraseException();
 		}
-		for(String word:phrase.split(" "))
+		for(String word:phrase.split(" ")) {
 			if(!word.matches("((^([a-z]*)$)|(^([A-Z]{1}([a-z]*)|([A-Z]*))$))?"))
 				throw new InvalidPhraseException();
-
+		}
 		this.phrase= phrase;
 	}
 
@@ -122,6 +122,7 @@ public class Piglatin {
 	}	
 
 	private String translateWord(String word) throws Exception{
+		if(word.length() > 0) {
 		String AY = "AY";
 		String ay = "ay";
 		String add = "";
@@ -158,6 +159,9 @@ public class Piglatin {
 				String substring = word.substring(1);
 				return substring+firstCharacter+add;
 			}
+		}
+		}else {
+			return word;
 		}
 	}
 
