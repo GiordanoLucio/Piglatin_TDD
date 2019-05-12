@@ -201,37 +201,31 @@ public class PiglatinTest {
 	@Test(expected=InvalidPhraseException.class)
 	public void testPhraseIsNotOk() throws Exception{
 		Piglatin piglatin = new Piglatin("OkOkOk");
-		//piglatin.translate();
 	}
 	
 	@Test(expected=InvalidPhraseException.class)
 	public void testPhraseIsNotOK() throws Exception{
 		Piglatin piglatin = new Piglatin("OkkkkAk");
-		//piglatin.translate();
 	}
 
 	@Test(expected=InvalidPhraseException.class)
 	public void testWrongWordCamelStartingVowel() throws Exception{
 		Piglatin piglatin = new Piglatin("OkOk");
-		//String translation = piglatin.translate();
 	}
 	@Test(expected=InvalidPhraseException.class)
 	public void testCamelCaseInTheMiddle() throws Exception
 	{
 		Piglatin piglatin = new Piglatin("birDie");
-		//String translation = piglatin.translate();
 	}
 
 	@Test(expected=InvalidPhraseException.class)
 	public void testWrongPhraseCamel() throws Exception{
 		Piglatin piglatin = new Piglatin("ThisIs AtEsT");
-		//String translation = piglatin.translate();
 	}	
 
 	@Test(expected=InvalidPhraseException.class)
 	public void testWrongPhraseCapInTheMiddle() throws Exception{
 		Piglatin piglatin = new Piglatin("biRd");
-		//String translation = piglatin.translate();
 	}		
 
 	@Test
