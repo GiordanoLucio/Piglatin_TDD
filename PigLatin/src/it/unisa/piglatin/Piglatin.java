@@ -83,6 +83,10 @@ public class Piglatin {
 		if(phrase.contains("  ") || startsOrEndWithSpace(phrase) || containsInvalidCharacter(phrase)) {
 			throw new InvalidPhraseException();
 		}
+		for(String word:phrase.split(" "))
+			if(!word.matches("((^([a-z]*)$)|(^([A-Z]{1}([a-z]*)|([A-Z]*))$))?"))
+				throw new InvalidPhraseException();
+
 		this.phrase= phrase;
 	}
 
@@ -125,8 +129,12 @@ public class Piglatin {
 		String AY = "AY";
 		String ay = "ay";
 		String add = "";
-		if(isUpper(word)) {add=AY;}else{ add = ay;}
-		if(onlyFirstIsUpperCase(word)) {ay="ay";}
+		//if(word.length()>1 && onlyFirstIsUpperCase(word)) {add=ay;}
+		if(isUpper(word)) {
+			add=AY;
+		}else{
+			add = ay;
+		}
 		if(phraseIsOk(word)) {
 			if(startsWithVowel(word)) {
 				if(onlyFirstIsUpperCase(word) && word.length() > 1) {
@@ -134,7 +142,7 @@ public class Piglatin {
 				}else {
 					return word+add;
 				}
-			}else if(startsWithXrCheck(word)) {
+			}else if(word.length() > 1 && startsWithXrCheck(word)) {
 				if(onlyFirstIsUpperCase(word)) {
 					return convertOnlyFirstToUpper(startsWithXr(word));
 				}else {
@@ -225,7 +233,7 @@ public class Piglatin {
 		}
 	}
 
-	private Boolean onlyFirstIsUpperCase(String word) throws Exception {
+	/**private Boolean onlyFirstIsUpperCase(String word) throws Exception {
 		String upper = word.toUpperCase();
 		boolean val = false;
 		if(word.length()>1 ) {
@@ -246,9 +254,19 @@ public class Piglatin {
 				val=false;
 			}
 			return val;
+		}	
+	}*/
+	private Boolean onlyFirstIsUpperCase(String word) throws Exception {
+		String upper = word.toUpperCase();
+		boolean val = false;
+		if(word.length()>1 ) {
+			if(word.charAt(0) == upper.charAt(0) && word.charAt(1) != upper.charAt(1)) {
+				val = true;
+			}else {
+				val= false;
+			}
 		}
-
-	}
+		return val;}
 
 	private String convertOnlyFirstToUpper(String word) {
 		String lowerCase=word.toLowerCase();
@@ -272,6 +290,4 @@ public class Piglatin {
 		}
 		return false;
 	}
-
-
 }

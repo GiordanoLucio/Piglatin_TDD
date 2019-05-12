@@ -323,4 +323,30 @@ public class PiglatinTest {
 		String translation = piglatin.translate();
 		assertEquals("aeiouay", translation);
 	}
+	
+	@Test
+	public void testSignleChar() throws Exception{
+		Piglatin piglatin = new Piglatin("m");
+		String translation = piglatin.translate();
+		assertEquals("may", translation);
+	}
+
+	@Test
+	public void testSignleChar2() throws Exception{
+		Piglatin piglatin = new Piglatin("P");
+		String translation = piglatin.translate();
+		assertEquals("PAY", translation);
+	}
+	@Test
+	public void testSignleCharVowel() throws Exception{
+		Piglatin piglatin = new Piglatin("O");
+		String translation = piglatin.translate();
+		assertEquals("OAY", translation);
+	}
+	
+	@Test(expected=Exception.class)
+	public void testEmptyString() throws Exception{
+		Piglatin piglatin = new Piglatin("");
+		String translation = piglatin.translate();
+	}
 }
