@@ -68,7 +68,7 @@ public class PiglatinTest {
 	}
 
 	@Test
-	public void testTranslateWordStartingWithE() throws Exception{
+	public void testTranslateWordStartingWithO() throws Exception{
 		Piglatin piglatin = new Piglatin("obobob");
 		String translation = piglatin.translate();
 		assertEquals("obobobay", translation);
@@ -120,13 +120,13 @@ public class PiglatinTest {
 
 	//2 story
 	@Test
-	public void testTranslateWordWithXr() throws Exception{
+	public void testTranslateWordWithXrA() throws Exception{
 		Piglatin piglatin = new Piglatin("xrayed");
 		String translation = piglatin.translate();
 		assertEquals("xrayeday", translation);
 	}
 	@Test
-	public void testTranslateWordWithXr2() throws Exception{
+	public void testTranslateWordWithXrU() throws Exception{
 		Piglatin piglatin = new Piglatin("xrumer");
 		String translation = piglatin.translate();
 		assertEquals("xrumeray", translation);
@@ -198,43 +198,33 @@ public class PiglatinTest {
 		assertEquals("APPLEAY", translation);
 	}
 
-	@Test
+	@Test(expected=InvalidPhraseException.class)
 	public void testPhraseIsNotOk() throws Exception{
 		Piglatin piglatin = new Piglatin("OkOkOk");
-		boolean translation = piglatin.phraseIsOk(piglatin.getPhrase());
-		assertFalse(translation);
+		piglatin.translate();
 	}
 	@Test
 	public void testPhraseIsOk1() throws Exception{
 		Piglatin piglatin = new Piglatin("APPLE");
-		boolean translation = piglatin.phraseIsOk("aPple");
-		assertFalse(translation);
+		String translation = piglatin.translate();
+		assertEquals("APPLEAY", translation);
 	}
 
-	@Test
+	@Test(expected=InvalidPhraseException.class)
 	public void testPhraseIsNotOK() throws Exception{
 		Piglatin piglatin = new Piglatin("OkkkkAk");
-		boolean translation = piglatin.phraseIsOk(piglatin.getPhrase());
-		assertFalse(translation);
-	}
-/**
-	@Test
-	public void TestOnlyFirstIsUpper() throws Exception{
-		Piglatin piglatin = new Piglatin("Okkkkk");
-		boolean translation = piglatin.onlyFirstIsUpperCase(piglatin.getPhrase());
-		assertTrue(translation);
+		piglatin.translate();
 	}
 
-	@Test
-	public void TestNotOnlyFirstIsUpper() throws Exception{
-		Piglatin piglatin = new Piglatin("OOk");
-		boolean translation = piglatin.onlyFirstIsUpperCase(piglatin.getPhrase());
-		assertFalse(translation);
-	}
-*/
 	@Test(expected=InvalidPhraseException.class)
 	public void testWrongWordCamelStartingVowel() throws Exception{
 		Piglatin piglatin = new Piglatin("OkOk");
+		String translation = piglatin.translate();
+	}
+	@Test(expected=InvalidPhraseException.class)
+	public void testCamelCaseInTheMiddle() throws Exception
+	{
+		Piglatin piglatin = new Piglatin("birDie");
 		String translation = piglatin.translate();
 	}
 
@@ -279,21 +269,21 @@ public class PiglatinTest {
 	}
 
 	@Test
-	public void testProxy() throws Exception{
+	public void testPhraseUpperCaseOnlyFirstWord() throws Exception{
 		Piglatin piglatin = new Piglatin ("Proxy yxxxorp");
 		String translation = piglatin.translate();
 		assertEquals("Oxypray orpyxxxay", translation);
 	}
 	
 	@Test
-	public void testPhraseMixed() throws Exception{
+	public void testPhraseUpperCaseCombination() throws Exception{
 		Piglatin piglatin = new Piglatin("Input and INPUT");
 		String translation = piglatin.translate();
 		assertEquals("Inputay anday INPUTAY", translation);
 	}
 
 	@Test
-	public void testPhraseMixed2() throws Exception{
+	public void testPhraseUpperCaseMixed() throws Exception{
 		Piglatin piglatin = new Piglatin("Tipo Questo Input Lo Accetta");
 		String translation = piglatin.translate();
 		assertEquals("Ipotay Uestoqay Inputay Olay Accettaay", translation);
@@ -311,5 +301,26 @@ public class PiglatinTest {
 		Piglatin piglatin = new Piglatin("Yellow bird");
 		String translation = piglatin.translate();
 		assertEquals("Ellowyay irdbay", translation);
+	}
+	
+	@Test
+	public void testXrInTheMiddle() throws Exception{
+		Piglatin piglatin = new Piglatin("mnxray");
+		String translation = piglatin.translate();
+		assertEquals("aymnxray", translation);
+	}
+	
+	@Test
+	public void testTranslateClusterWithAllConsonantAndXr() throws Exception{
+		Piglatin piglatin = new Piglatin("sssxr");
+		String translation = piglatin.translate();
+		assertEquals("sssxray", translation);
+	}
+	
+	@Test
+	public void testTranslateAllVowels() throws Exception{
+		Piglatin piglatin = new Piglatin("aeiou");
+		String translation = piglatin.translate();
+		assertEquals("aeiouay", translation);
 	}
 }

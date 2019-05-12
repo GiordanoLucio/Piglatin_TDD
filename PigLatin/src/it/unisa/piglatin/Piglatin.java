@@ -80,7 +80,6 @@ public class Piglatin {
 	}
 
 	public Piglatin(String phrase) throws InvalidPhraseException {
-		//if(containsSubsequentSpaces(phrase) || startsWithSpace(phrase)) {	}
 		if(phrase.contains("  ") || startsOrEndWithSpace(phrase) || containsInvalidCharacter(phrase)) {
 			throw new InvalidPhraseException();
 		}
@@ -137,7 +136,7 @@ public class Piglatin {
 				}
 			}else if(startsWithXrCheck(word)) {
 				if(onlyFirstIsUpperCase(word)) {
-				return convertOnlyFirstToUpper(startsWithXr(word));
+					return convertOnlyFirstToUpper(startsWithXr(word));
 				}else {
 					return startsWithXr(word);
 				}
@@ -176,7 +175,7 @@ public class Piglatin {
 	private boolean startsWithClusters(String word) {
 		int count = 0;
 		int i = 0;
-		while(validCharacters.contains(word.charAt(i)) && !vowels.contains(word.charAt(i))) {
+		while(i < word.length() && validCharacters.contains(word.charAt(i)) && !vowels.contains(word.charAt(i))) {
 			count +=1;
 			i++;
 		}
@@ -196,7 +195,7 @@ public class Piglatin {
 		}
 		int count = 0;
 		int i = 0;
-		while(validCharacters.contains(word.charAt(i)) && !vowels.contains(word.charAt(i))) {
+		while(i < word.length() && validCharacters.contains(word.charAt(i)) && !vowels.contains(word.charAt(i))) {
 			count +=1;
 			i++;
 		}
@@ -255,7 +254,7 @@ public class Piglatin {
 		String lowerCase=word.toLowerCase();
 		return Character.toUpperCase(lowerCase.charAt(0)) + lowerCase.substring(1);		
 	}
-	public Boolean phraseIsOk(String word) throws Exception{
+	private Boolean phraseIsOk(String word) throws InvalidPhraseException{
 		String upper = word.toUpperCase();
 		boolean val = true;
 		for(int i=1; i<word.length();i++) {
